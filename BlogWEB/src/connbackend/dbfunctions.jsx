@@ -38,3 +38,41 @@ async function buscarUsuarioPorEmail(email, plainPassword) {
         conexion.release();
     }
 }
+
+
+// Función para obtener sesiones por periodo del día
+const getSesionesPorPeriodo = async (userId, periodo) => {
+  // Definir los rangos de tiempo
+  let tiempoInicio, tiempoFin;
+  switch (periodo) {
+    case 'manana':
+      tiempoInicio = '06:00:00';
+      tiempoFin = '12:00:00';
+      break;
+    case 'tarde':
+      tiempoInicio = '12:01:00';
+      tiempoFin = '18:00:00';
+      break;
+    case 'noche':
+      tiempoInicio = '18:01:00';
+      tiempoFin = '05:59:59';
+      break;
+    default:
+      throw new Error('Periodo no válido. Debe ser manana, tarde o noche.');
+  }
+
+  // Asumimos que las sesiones tienen una columna 'hora_inicio' y una 'hora_fin'
+  const query = `
+    SELECT * FROM students_Session
+    WHERE id_student = ?
+      AND ((hora_inicio BETWEEN ? AND ?) OR (hora_fin BETWEEN ? AND ?))
+  `;
+
+  const connection = await pool.getConnection();
+  try {
+    const [results] = await connection.query(query, [userId, tiempoInicio, tiempoFin, tiempoInicio, tiempoFin]);
+    return results;
+  } finally {
+    connection.release();
+  }
+};

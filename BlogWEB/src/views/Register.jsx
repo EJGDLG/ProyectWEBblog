@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import Button from '../components/Button.jsx'; 
 import './Register.css';
 
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState(''); // Nuevo estado para la confirmación de la contraseña
-  const [role, setRole] = useState('student'); // O el valor predeterminado que desees
   const [error, setError] = useState(''); // Estado para manejar los errores de validación
 
   const handleRegister = async (event) => {
