@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Button from '../components/Button.jsx'; 
 import './Register.css';
 
 const Register = () => {
@@ -10,7 +11,6 @@ const Register = () => {
 
   const handleRegister = async (event) => {
     event.preventDefault();
-    
     // Verifica que las contraseñas coincidan
     if (password !== confirmPassword) {
       setError('Las contraseñas no coinciden.');
@@ -20,12 +20,13 @@ const Register = () => {
     setError('');
     // Aquí añadirías la lógica para enviar los datos al servidor
     console.log('Registrando', { email, password, role });
+    // ...
   };
 
   return (
     <div className="register-container">
+      <h1>Register</h1>
       <form onSubmit={handleRegister}>
-        <span>Usa tu correo electrónico UVG</span>
         <input
           type="email"
           value={email}
@@ -47,6 +48,8 @@ const Register = () => {
           placeholder="Confirm Password"
           required
         />
+        {error && <div style={{ color: 'red' }}>{error}</div>}
+        
         <button type="submit">Register</button>
       </form>
     </div>
