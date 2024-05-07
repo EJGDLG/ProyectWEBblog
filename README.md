@@ -1,11 +1,10 @@
 # ProyectWEBblog
-# Proyecto XYZ
+# Proyecto Blog
 
 ## Descripción del proyecto
-El proyecto XYZ es una aplicación web diseñada para facilitar la gestión de tareas y proyectos en equipos de trabajo. Permite a los usuarios crear, asignar, y dar seguimiento a tareas, así como también organizar proyectos y colaborar con otros miembros del equipo.
-
+El proyecto Blog Accesible es una plataforma de blogging diseñada para ser accesible públicamente a través de una URL. Esto significa que cualquier persona con la dirección del sitio puede visitar y ver el contenido del blog sin necesidad de autenticación, excepto para el área de administración.
 ## Tecnologías utilizadas
-El proyecto XYZ utiliza las siguientes tecnologías:
+El proyecto blog utiliza las siguientes tecnologías:
 
 - **React.js**: Se eligió React.js por su eficiencia en el manejo del DOM y su facilidad para construir interfaces de usuario interactivas.
 - **Node.js**: Se utiliza Node.js para el backend de la aplicación, aprovechando su capacidad para manejar múltiples conexiones de forma asíncrona.
