@@ -4,8 +4,10 @@ const pool = require('./Connection');  // Asumiendo que tu archivo se llama Conn
 const cors = require('cors');
 
 const app = express();
+const PORT = process.env.PORT || 3000; // Puerto dinámico o 3000 si no está definido
+
 app.use(cors());  // Permite solicitudes CORS de tu frontend
-app.use(express.json());  // Para parsear JSON en el cuerpo de las solicitudes
+app.use(bodyParser.json());  // Para parsear JSON en el cuerpo de las solicitudes
 
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
@@ -42,14 +44,6 @@ app.post('/login', async (req, res) => {
     }
 });
 
-app.listen(3000, () => {
-    console.log('Server is running on port 3000');
-});
-
-
-
-
-const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
