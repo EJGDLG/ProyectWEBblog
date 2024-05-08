@@ -15,66 +15,75 @@ function App() {
   const [password, setPassword] = useState('');
   const [showRegisterView, setShowRegisterView] = useState(false);
 
- useEffect(() => {
-    const container = document.getElementById('container');
-    const registerBtn = document.getElementById('register');
-    const loginBtn = document.getElementById('login');
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    console.log("Attempting to login with:", { email, password });
 
-    if (container && registerBtn && loginBtn) {
-        const handleRegisterClick = () => {
-            container.classList.add("active");
-        };
+    try {
+      const response = await fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
 
-        const handleLoginClick = () => {
-            container.classList.remove("active");
-        };
+      console.log("Server response:", response);
 
-        registerBtn.addEventListener('click', handleRegisterClick);
-        loginBtn.addEventListener('click', handleLoginClick);
-
-        // Cleanup
-        return () => {
-            registerBtn.removeEventListener('click', handleRegisterClick);
-            loginBtn.removeEventListener('click', handleLoginClick);
-        };
-    }
-}, []);
-
-
-const handleLogin = async (event) => {
-  event.preventDefault();
-  console.log("Attempting to login with:", { email, password });
-
-  try {
-    const response = await fetch('/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password })
-    });
-
-    console.log("Server response:", response);
-
-    if (!response.ok) {
-      try {
-        const errorData = await response.json();
-        console.error('Server responded with:', errorData);
-        alert(`Login failed: ${errorData.message}`);
-      } catch (jsonError) {
-        const errorText = await response.text();
-        console.error('Server responded with non-JSON:', errorText);
-        alert(`Login failed: ${errorText}`);
+      if (!response.ok) {
+        try {
+          const errorData = await response.json();
+          console.error('Server responded with:', errorData);
+          alert(`Login failed: ${errorData.message}`);
+        } catch (jsonError) {
+          const errorText = await response.text();
+          console.error('Server responded with non-JSON:', errorText);
+          alert(`Login failed: ${errorText}`);
+        }
+        return;  // Exit the function after handling the error
       }
-      return;  // Exit the function after handling the error
-    }
 
-    const data = await response.json();
-    console.log('Login Successful:', data);
-    alert('Login Successful!');
-  } catch (error) {
-    console.error('Login error:', error);
-    alert('Login failed: Unexpected error occurred.');
-  }
-};
+      const data = await response.json();
+      console.log('Login Successful:', data);
+      alert('Login Successful!');
+    } catch (error) {
+      console.error('Login error:', error);
+      alert('Login failed: Unexpected error occurred.');
+    }
+  };
+
+  const handleRegister = async (event) => {
+    event.preventDefault();
+    console.log("Attempting to register with:", { email, password });
+
+    try {
+      const response = await fetch('/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+
+      console.log("Server response:", response);
+
+      if (!response.ok) {
+        try {
+          const errorData = await response.json();
+          console.error('Server responded with:', errorData);
+          alert(`Registration failed: ${errorData.message}`);
+        } catch (jsonError) {
+          const errorText = await response.text();
+          console.error('Server responded with non-JSON:', errorText);
+          alert(`Registration failed: ${errorText}`);
+        }
+        return;  // Exit the function after handling the error
+      }
+
+      const data = await response.json();
+      console.log('Registration Successful:', data);
+      alert('Registration Successful!');
+    } catch (error) {
+      console.error('Registration error:', error);
+      alert('Registration failed: Unexpected error occurred.');
+    }
+  };
 
   // Alternar entre la vista de inicio de sesión y registro
   const toggleView = () => {
@@ -107,5 +116,3 @@ const handleLogin = async (event) => {
 }
 
 export default App;
-
-
