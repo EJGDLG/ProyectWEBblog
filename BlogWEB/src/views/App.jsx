@@ -6,10 +6,11 @@ import Footer from '../components/Footer';
 import Register from './Register';
 import blog from './blog';
 
-// Custom Input Component
+
 const Input = ({ type, placeholder, value, onChange }) => (
   <input type={type} placeholder={placeholder} value={value} onChange={onChange} />
 );
+
 
 function App() {
   const [email, setEmail] = useState('');
@@ -33,7 +34,7 @@ function App() {
         registerBtn.addEventListener('click', handleRegisterClick);
         loginBtn.addEventListener('click', handleLoginClick);
 
-        // Cleanup
+
         return () => {
             registerBtn.removeEventListener('click', handleRegisterClick);
             loginBtn.removeEventListener('click', handleLoginClick);
@@ -61,14 +62,13 @@ const handleLogin = async (event) => {
         console.error('Server responded with:', errorData);
         alert(`Login failed: ${errorData.message}`);
       } catch (jsonError) {
-        const errorText = await response.text();
-        console.error('Server responded with non-JSON:', errorText);
-        alert(`Login failed: ${errorText}`);
+        console.error('Server responded with non-JSON:', jsonError);
+        alert(`Login failed: Unexpected error occurred.`);
       }
-      return;  // Exit the function after handling the error
+      return;  
     }
 
-    const data = await response.json();
+    const data = await response.json(); // Lee el cuerpo de la respuesta solo una vez
     console.log('Login Successful:', data);
     alert('Login Successful!');
   } catch (error) {
@@ -77,7 +77,7 @@ const handleLogin = async (event) => {
   }
 };
 
-  // Alternar entre la vista de inicio de sesión y registro
+
   const toggleView = () => {
     setShowRegisterView(!showRegisterView);
   };
@@ -87,10 +87,10 @@ const handleLogin = async (event) => {
       <Header title={showRegisterView ? "Registro" : "Iniciar Sesión"} />
       <div className='container' id='container'>
         {showRegisterView ? (
-          // Vista de registro
+  
           <Register />
         ) : (
-          // Vista de inicio de sesión
+  
           <div className='form-container sign-in'>
             <form onSubmit={handleLogin}>
               <span id='Loginsuggestions'>Usa tu correo electrónico y contraseña para iniciar sesión</span>

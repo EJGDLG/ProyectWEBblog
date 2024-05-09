@@ -1,16 +1,12 @@
+// NavBar.jsx
 import React from 'react';
-import NavBar from '../components/NavBar';
-import MainContent from '../components/MainContent';
-import RightSidebar from '../components/RightSidebar';
 
-const blog = () => {
+const NavBar = () => {
   return (
-    <div>
-      <NavBar />
-      <MainContent />
-      <RightSidebar />
-    </div>
+    <nav>
+      {/* Contenido del NavBar */}
+    </nav>
   );
 };
 
-export default blog;
+export default NavBar; 

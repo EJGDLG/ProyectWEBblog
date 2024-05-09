@@ -1,13 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const pool = require('./Connection');  // Asumiendo que tu archivo se llama Connection.js y está en la carpeta backend
+const pool = require('./Connection');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
-const secretKey = process.env.JWT_SECRET || 'tu_secreto_aqui'; // Utiliza una variable de entorno para tu secreto
+const secretKey = process.env.JWT_SECRET || 'tu_secreto_aqui'; 
 
 const app = express();
-app.use(cors());  // Permite solicitudes CORS de tu frontend
-app.use(express.json());  // Para parsear JSON en el cuerpo de las solicitudes
+app.use(cors());  
+app.use(express.json());  
 
 
 const authenticateToken = (req, res, next) => {
@@ -32,7 +32,7 @@ app.post('/login', async (req, res) => {
         return res.status(401).json({ success: false, message: "Invalid email domain. Only @uvg.edu.gt is allowed." });
     }
 
-    // Continuar con la lógica de inicio de sesión si el correo es válido
+    
     try {
         const connection = await pool.getConnection();
         try {
@@ -40,7 +40,7 @@ app.post('/login', async (req, res) => {
                 'SELECT id FROM user WHERE email = ? AND password = ?',
                 [email, password]
             );
-            console.log(results);  // Ver qué está devolviendo la base de datos
+            console.log(results);  
             if (results.length > 0) {
                 const user = results[0];
                 const token = jwt.sign({ id: user.id }, secretKey, { expiresIn: '1h' });
@@ -59,22 +59,22 @@ app.post('/login', async (req, res) => {
 
 
 
-// app.get('/sessions', authenticateToken, async (req, res) => {
-//     try {
-//       const userId = req.user.id;
-//       const query = 'SELECT * FROM students_Session WHERE id_student = ?';
-//       const [results] = await pool.query(query, [userId]);
-//       if (results.length > 0) {
-//         res.json(results);
-//       } else {
-//         // Cambia aquí para enviar una respuesta 200 con un mensaje y un array vacío
-//         res.json({ success: true, message: "No sessions found", sessions: [] });
-//       }
-//     } catch (error) {
-//       console.error('Database error:', error);
-//       res.status(500).json({ success: false, message: "Internal server error" });
-//     }
-//   });
+pp.get('/sessions', authenticateToken, async (req, res) => {
+     try {
+       const userId = req.user.id;
+       const query = 'SELECT * FROM students_Session WHERE id_student = ?';
+       const [results] = await pool.query(query, [userId]);
+      if (results.length > 0) {
+        res.json(results);
+       } else {
+
+       res.json({ success: true, message: "No sessions found", sessions: [] });
+      }
+    } catch (error) {
+      console.error('Database error:', error);
+      res.status(500).json({ success: false, message: "Internal server error" });
+   }
+   });
   
 
 

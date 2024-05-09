@@ -89,9 +89,9 @@ app.post('/login', async (req, res) => {
 });
 
 
-// Función para obtener sesiones por periodo del día
+
 const getSesionesPorPeriodo = async (userId, periodo) => {
-  // Definir los rangos de tiempo
+
   let tiempoInicio, tiempoFin;
   switch (periodo) {
     case 'manana':

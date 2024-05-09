@@ -23,19 +23,19 @@ const Register = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }), // Enviar email y password al servidor
+        body: JSON.stringify({ email, password }), 
       });
 
       if (response.ok) {
         console.log('Usuario registrado exitosamente');
-        // Aquí podrías redirigir a otra página o mostrar un mensaje de éxito al usuario
+    
       } else {
         console.error('Error al registrar usuario:', response.statusText);
-        // Aquí podrías mostrar un mensaje de error al usuario
+      
       }
     } catch (error) {
       console.error('Error al conectar con el servidor:', error.message);
-      // Aquí podrías mostrar un mensaje de error al usuario
+   
     }
   };
 
