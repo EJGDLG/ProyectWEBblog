@@ -25,4 +25,5 @@ Para ejecutar el proyecto localmente, sigue estos pasos:
 
 Vista de las paginas.
 [![image.png](https://i.postimg.cc/90wrQp6h/image.png)](https://postimg.cc/H8HpSQWZ)
+Como se deveria de ver
 [![image.png](https://i.postimg.cc/63cbHVqC/image.png)](https://postimg.cc/WFD7zkM4)
