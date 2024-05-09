@@ -1,3 +1,12 @@
+# React + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
 # ProyectWEBblog
 # Proyecto Blog
 
@@ -22,8 +31,3 @@ Para ejecutar el proyecto localmente, sigue estos pasos:
 4. Ejecuta el servidor backend usando `npm start` en el directorio del backend.
 5. Ejecuta el servidor frontend usando `npm run dev` en el directorio del frontend.
 6. Abre tu navegador y navega a `http://localhost:3000` para ver la aplicación en funcionamiento.
-
-Vista de las paginas.
-[![image.png](https://i.postimg.cc/90wrQp6h/image.png)](https://postimg.cc/H8HpSQWZ)
-Como se deveria de ver
-[![image.png](https://i.postimg.cc/63cbHVqC/image.png)](https://postimg.cc/WFD7zkM4)
