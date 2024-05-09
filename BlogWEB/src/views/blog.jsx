@@ -1,7 +1,7 @@
 import React from 'react';
-import NavBar from './NavBar';
-import MainContent from './MainContent';
-import RightSidebar from './RightSidebar';
+import NavBar from '../components/NavBar';
+import MainContent from '../components/MainContent';
+import RightSidebar from '../components/RightSidebar';
 
 const blog = () => {
   return (

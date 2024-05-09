@@ -53,8 +53,19 @@ const handleLogin = async (event) => {
       body: JSON.stringify({ email, password })
     });
 
+    console.log("Server response:", response);
+
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      try {
+        const errorData = await response.json();
+        console.error('Server responded with:', errorData);
+        alert(`Login failed: ${errorData.message}`);
+      } catch (jsonError) {
+        const errorText = await response.text();
+        console.error('Server responded with non-JSON:', errorText);
+        alert(`Login failed: ${errorText}`);
+      }
+      return;  // Exit the function after handling the error
     }
 
     const data = await response.json();
@@ -62,10 +73,9 @@ const handleLogin = async (event) => {
     alert('Login Successful!');
   } catch (error) {
     console.error('Login error:', error);
-    alert(`Login failed: ${error.message}`);
+    alert('Login failed: Unexpected error occurred.');
   }
 };
-
 
   // Alternar entre la vista de inicio de sesión y registro
   const toggleView = () => {
