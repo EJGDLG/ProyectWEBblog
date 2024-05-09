@@ -24,3 +24,4 @@ Para ejecutar el proyecto localmente, sigue estos pasos:
 6. Abre tu navegador y navega a `http://localhost:3000` para ver la aplicación en funcionamiento.
 
 ¡Listo! Ahora deberías poder ver y utilizar la aplicación en tu máquina local.
+[![image.png](https://i.postimg.cc/90wrQp6h/image.png)](https://postimg.cc/H8HpSQWZ)
