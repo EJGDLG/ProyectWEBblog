@@ -1,4 +1,6 @@
 import bcrypt from 'bcryptjs';
+const bcrypt = require('bcryptjs'); // Importar bcrypt para hashear contraseñas
+const { crearUsuario, buscarUsuarioPorEmail } = require('./funcionesUsuarios');
 
 // Función modificada para crear un nuevo usuario con contraseña hasheada
 async function crearUsuario(username, email, plainPassword) {
@@ -38,6 +40,53 @@ async function buscarUsuarioPorEmail(email, plainPassword) {
         conexion.release();
     }
 }
+
+
+app.post('/register', async (req, res) => {
+  const { username, email, password } = req.body;
+
+  // Verificar si el correo pertenece al dominio uvg.edu.gt
+  const domainRegex = /@uvg.edu.gt$/i; // Cambiado a uvg.edu.gt
+  if (!domainRegex.test(email)) {
+      return res.status(401).json({ success: false, message: "Invalid email domain. Only @uvg.edu.gt is allowed." });
+  }
+
+  try {
+      // Crear usuario con contraseña hasheada
+      await crearUsuario(username, email, password);
+      res.json({ success: true, message: "User registered successfully" });
+  } catch (error) {
+      console.error('Error al registrar usuario:', error);
+      res.status(500).json({ success: false, message: "Internal server error" });
+  }
+});
+
+// Ruta para el login (ya incluido en tu código)
+app.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+  console.log(`Attempting login with email: ${email} and password: ${password}`);
+
+  // Verificar si el correo pertenece al dominio uvg.edu.gt
+  const domainRegex = /@uvg.edu.gt$/i; // Cambiado a uvg.edu.gt
+  if (!domainRegex.test(email)) {
+      return res.status(401).json({ success: false, message: "Invalid email domain. Only @uvg.edu.gt is allowed." });
+  }
+
+  // Continuar con la lógica de inicio de sesión si el correo es válido
+  try {
+      // Buscar usuario por email y verificar contraseña
+      const user = await buscarUsuarioPorEmail(email, password);
+      if (user) {
+          // Usuario encontrado, puedes generar un token de sesión si es necesario
+          res.json({ success: true, message: "Login successful" });
+      } else {
+          res.status(401).json({ success: false, message: "Invalid credentials" });
+      }
+  } catch (error) {
+      console.error('Error al buscar usuario:', error);
+      res.status(500).json({ success: false, message: "Internal server error" });
+  }
+});
 
 
 // Función para obtener sesiones por periodo del día

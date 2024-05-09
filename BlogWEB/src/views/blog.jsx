@@ -3,7 +3,7 @@ import NavBar from './NavBar';
 import MainContent from './MainContent';
 import RightSidebar from './RightSidebar';
 
-const App = () => {
+const blog = () => {
   return (
     <div>
       <NavBar />
@@ -13,4 +13,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default blog;
