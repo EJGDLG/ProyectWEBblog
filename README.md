@@ -23,5 +23,6 @@ Para ejecutar el proyecto localmente, sigue estos pasos:
 5. Ejecuta el servidor frontend usando `npm run dev` en el directorio del frontend.
 6. Abre tu navegador y navega a `http://localhost:3000` para ver la aplicación en funcionamiento.
 
-¡Listo! Ahora deberías poder ver y utilizar la aplicación en tu máquina local.
+Vista de las paginas.
 [![image.png](https://i.postimg.cc/90wrQp6h/image.png)](https://postimg.cc/H8HpSQWZ)
+[![image.png](https://i.postimg.cc/63cbHVqC/image.png)](https://postimg.cc/WFD7zkM4)
